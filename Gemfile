@@ -15,6 +15,8 @@ gem 'activesupport'
 gem 'activerecord'
 
 gem 'rake'
+# Use bcrypt for encryption
+gem 'bcrypt'
 
 group :test do
   gem 'faker'
