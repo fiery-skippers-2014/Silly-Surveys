@@ -4,7 +4,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.string :description
       t.belongs_to :survey
 
-      t.timestamp
+      t.timestamps
     end
   end
 end
