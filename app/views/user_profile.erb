@@ -1,0 +1,15 @@
+<div class="container">
+   <% @surveys.each do |survey| %>
+    <div class="survey">
+    <br>
+      <p><%= survey.title %></p>
+    </div>
+  <% end %>
+
+
+   <form method="get" action="/surveys/new">
+
+        <input type="submit" value="Create a Survey">
+      </form>
+
+</div>
