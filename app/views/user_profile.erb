@@ -1,10 +1,15 @@
-<div class="container">
+<div class="big_container">
    <% @surveys.each do |survey| %>
     <div class="survey">
       <p><%= survey.title %></p>
+
+      <form id="<%= survey.id %>" class="survey_details" method="get" action="/survey/details" >
+        <input type="hidden" value="<%= survey.id %>" name="survey_id">
+        <input class="formButton" type="submit" value="Details">
+      </form>
+
     </div>
   <% end %>
-
 
    <form method="get" action="/surveys/new">
 
@@ -12,3 +17,5 @@
       </form>
 
 </div>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
