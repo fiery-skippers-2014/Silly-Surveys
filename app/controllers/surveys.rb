@@ -26,5 +26,5 @@ get '/survey/details' do
   puts "#{@answer_frequency}"
 
   #return the answer frequency
-  @answer_frequency.to_s
+  @answer_frequency.join(",")
 end

@@ -22,7 +22,70 @@ Ajax.prototype = {
 
   onSuccess: function(serverData){
      console.log("lala");
-     console.log(serverData)
+
+     // checking the serverData type
+     console.log(typeof serverData)
+
+     // creating a JS array from the ruby string
+     var numbers = serverData.split(",")
+       console.log(numbers);
+
+       // parsing the string numbers to numbers
+     for (var i = 0; i <numbers.length ; i++) {
+          actual_number = parseInt(numbers[i]);
+          numbers[i] = actual_number;
+     }
+
+     console.log(numbers)
+     console.log(serverData.length);
+
+   //uploading it to the graph
+            //     $(function () {
+            //     $('#container').highcharts({
+            //         chart: {
+            //             plotBackgroundColor: null,
+            //             plotBorderWidth: null,
+            //             plotShadow: false
+            //         },
+            //         title: {
+            //             text: 'Browser market shares at a specific website, 2010'
+            //         },
+            //         tooltip: {
+            //           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            //         },
+            //         plotOptions: {
+            //             pie: {
+            //                 allowPointSelect: true,
+            //                 cursor: 'pointer',
+            //                 dataLabels: {
+            //                     enabled: true,
+            //                     color: '#000000',
+            //                     connectorColor: '#000000',
+            //                     format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            //                 }
+            //             }
+            //         },
+            //         series: [{
+            //             type: 'pie',
+            //             name: 'Browser share',
+            //             data: [
+            //                 ['Firefox',   45.0],
+            //                 ['IE',       26.8],
+            //                 {
+            //                     name: 'Chrome',
+            //                     y: 12.8,
+            //                     sliced: true,
+            //                     selected: true
+            //                 },
+            //                 ['Safari',    8.5],
+            //                 ['Opera',     6.2],
+            //                 ['Others',   0.7]
+            //             ]
+            //         }]
+            //     });
+            // });
+
+     // end of the on success method
    },
 
   onFail: function(){
