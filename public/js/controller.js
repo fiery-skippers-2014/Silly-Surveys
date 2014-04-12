@@ -12,7 +12,7 @@ Controller.prototype = {
   pingServer: function(event){
     event.preventDefault()
     this.client.request('get', '/surveys/question/new')
-    .done(this.onSuccess.bind(this))
+    .done(this.placeQuestionForm.bind(this))
     .fail(this.onFail)
   },
   getCurrentUser: function(event){
@@ -27,11 +27,18 @@ Controller.prototype = {
   createQuestion: function(){
     event.preventDefault()
     this.client.request('POST', "/surveys/questions", ".questionForm")
-    .done(this.onSuccess.bind(this))
+    .done(this.placeSaveForm.bind(this))
     .fail(this.onFail)
   },
-  onSuccess: function(data){
-    this.view.placeQuestionField(data)
+  placeQuestionForm: function(data){
+    this.view.placeQuestionField(data, ".questionCreation")
+    $(".questionCreation").slideDown()
+  },
+  placeSaveForm: function(data){
+    this.view.placeQuestionField(data, ".saveForm")
+    $(".questionCreation").slideUp("slow", function(){
+      $(this).empty()
+    })
   },
   getData: function(data, b, c){
     console.log(b)

@@ -1,8 +1,5 @@
 <h1><%= @question.description %></h1>
-
-<form action="/test" method="post">
   <% @question.answers.each do |answer| %>
     <input type="radio" name="sex" value="male"><%= answer.answer %><br>
   <% end %>
-  <button type="submit">Submit</button>
-</form>
+  

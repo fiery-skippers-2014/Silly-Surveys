@@ -5,7 +5,7 @@ end
 get '/surveys/questions/new' do
   @question = Question.last
 
-  erb :_formatted_question
+  erb :_formatted_question, layout: false
 end
 
 post "/surveys/questions" do
