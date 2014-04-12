@@ -3,6 +3,11 @@ get '/surveys/new' do
 end
 
 post '/surveys' do
-  Survey.create(params)
-
+  if params[:type] == "submit"
+    Survey.create(params)
+  elsif params[:type] == "question"
+    erb :_question, layout: false
+  elsif params[:type] == "answer"
+    erb :_answer, layout: false
+  end
 end
