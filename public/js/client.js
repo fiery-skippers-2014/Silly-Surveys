@@ -7,8 +7,7 @@ Client.prototype = {
   request: function(resource) {
     var response = $.ajax({
       type: this.method,
-      url: this.action,
-      data: { type: resource }
+      url: this.action
     })
     return response
   }

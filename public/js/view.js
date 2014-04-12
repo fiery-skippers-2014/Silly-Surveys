@@ -15,7 +15,7 @@ View.prototype = {
     return document.querySelector(this.submitFormButton)
   },
   placeQuestionField: function(question){
-    var questions = document.querySelector()
-    console.log(questionButton).appendChild(question)
+    var form = document.querySelector("form")
+    $(form).after(question)
   }
 }

@@ -6,11 +6,22 @@ function Controller(client, view){
 Controller.prototype = {
   listeners: function(){
     var questionButton = this.view.getQuestionButton()
-    questionButton.addEventListener('click', this.pingServer.bind(this), false)
+    $('body').on('click', ".question", this.pingServer.bind(this))
+    $('body').on('click', ".submit", function(){
+      event.preventDefault()
+      var client = new Client('POST', "/charles")
+      $.ajax({
+        type: 'POST',
+        url: '/charles',
+        data:$(".questionForm").serialize()
+      })
+      .done(this.onSuccess.bind(this))
+      .fail(this.onFail)
+    }.bind(this))
   },
   pingServer: function(event){
     event.preventDefault()
-    this.client.request("question")
+    this.client.request()
     .done(this.onSuccess.bind(this))
     .fail(this.onFail)
   },
