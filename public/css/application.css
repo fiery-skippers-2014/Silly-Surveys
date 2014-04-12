@@ -9,6 +9,15 @@ th {
     text-align: left;
 }
 
+.survey {
+   margin: 20px auto;
+    width: 500px;
+
+    border: 1px dotted black;
+    text-align: center;
+    background-color: green;
+}
+
 #color_me li{
  	display:block;
  	width:30%;
