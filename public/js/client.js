@@ -1,13 +1,13 @@
-function Client(method, action){
-  this.method = method
-  this.action = action
+function Client(){
 }
 
 Client.prototype = {
-  request: function(resource) {
+  request: function(method, action, resource) {
     var response = $.ajax({
-      type: this.method,
-      url: this.action
+      type: method,
+      url: action,
+      data: $(resource).serialize(),
+      dataType: "text"
     })
     return response
   }
