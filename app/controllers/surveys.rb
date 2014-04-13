@@ -7,6 +7,12 @@ post '/surveys' do
   questions.each do |question|
     question.update_attribute(:survey_id,survey.id)
   end
+
+  SurveyInteraction.create(
+    user_id: session[:user_id],
+    survey_id: survey.id,
+    creator: true
+    )
   "yes"
 end
 
