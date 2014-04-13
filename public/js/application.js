@@ -1,9 +1,10 @@
-
-
-
 $(document).ready(function(){
   domSelectors = {
-    addQuestionButton: ".question"
+    addQuestionButton: ".question",
+    submitFormButton: ".submit",
+    questionCreationCell: ".questionCreation",
+    saveFormButton: ".saveFormButton",
+    surveyTitle: ".title"
   }
 
   var view = new View(domSelectors)

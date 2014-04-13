@@ -1,16 +1,36 @@
+post '/surveys' do
+  survey = Survey.create(
+    title: params[:title]
+    )
+  questions = Question.where(user_id: session[:user_id])
+
+  questions.each do |question|
+    question.update_attribute(:survey_id,survey.id)
+  end
+
+  SurveyInteraction.create(
+    user_id: session[:user_id],
+    survey_id: survey.id,
+    creator: true
+    )
+  "yes"
+end
+
 get '/surveys/new' do
   erb :new_survey
 end
 
 get '/surveys/questions/new' do
   @question = Question.last
+  @answers = @question.answers
 
-  erb :_formatted_question
+  erb :_formatted_question, layout: false
 end
 
 post "/surveys/questions" do
   question = Question.create(
     description: params[:description],
+    user_id: session[:user_id]
     )
   3.times do |x|
     x += 1
