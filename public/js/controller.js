@@ -3,48 +3,47 @@ function Controller(client, view){
   this.view = view
 }
 
+//||||||||||||
+// Listeners
+//||||||||||||
 Controller.prototype = {
   listeners: function(){
-    var questionButton = this.view.getQuestionButton()
     $('body').on('click', ".question", this.pingServer.bind(this))
     $('body').on('click', ".submit", this.createQuestion.bind(this))
+    $('body').on('click', ".saveFormButton", this.saveSurvey.bind(this))
   },
+//||||||||||||
+// Ajax requests
+//||||||||||||
   pingServer: function(event){
     event.preventDefault()
     this.client.request('get', '/surveys/question/new')
     .done(this.placeQuestionForm.bind(this))
     .fail(this.onFail)
   },
-  getCurrentUser: function(event){
-    this.client.request('GET', "/users/session-id").done(this.getData.bind(this)).fail(this.onFail)
-  },
-  // createSurvey: function(event){
-  //   event.preventDefault()
-  //   var currentUser = this.getCurrentUser()
-  //   console.log(currentUser)
-  //   return this.client.request('POST','"/users/' + currentUser + '/surveys"').done(this.getData).fail(this.onFail)
-  // },
   createQuestion: function(){
     event.preventDefault()
     this.client.request('POST', "/surveys/questions", ".questionForm")
     .done(this.placeSaveForm.bind(this))
     .fail(this.onFail)
   },
+  saveSurvey: function(){
+    var thing = this.view.getSurveyTitle().selector
+    this.client.request('POST', "/surveys", thing).done(this.survey)
+  },
+//||||||||||||
+// Callbacks
+//||||||||||||
   placeQuestionForm: function(data){
-    this.view.placeQuestionField(data, ".questionCreation")
-    $(".questionCreation").slideDown()
+    this.view.placeNode(data, ".questionCreation")
+    this.view.slideQuestionDown()
   },
   placeSaveForm: function(data){
-    this.view.placeQuestionField(data, ".saveForm")
-    $(".questionCreation").slideUp("slow", function(){
-      $(this).empty()
-    })
+    this.view.placeNode(data, ".saveForm")
+    this.view.slideQuestionUp()
   },
-  getData: function(data, b, c){
-    console.log(b)
+  survey: function(data){
     console.log(data)
-    console.log(c.responseText)
-    return c.responseText
   },
   onFail: function() {
     console.log("noooo")

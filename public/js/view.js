@@ -1,7 +1,9 @@
 function View(selectors){
   this.addQuestionButton = selectors["addQuestionButton"]
-  this.addAnswerButton   = selectors["addAnswerButton"]
-  this.submitFormButton  = selectors["submitFormButton"]
+  this.submitQuestionButton  = selectors["submitQuestionButton"]
+  this.questionCreationCell  = selectors["questionCreationCell"]
+  this.saveFormButton = selectors["saveFormButton"]
+  this.surveyTitle = selectors["surveyTitle"]
 }
 
 View.prototype = {
@@ -12,10 +14,21 @@ View.prototype = {
     return document.querySelector(this.addAnswerButton)
   },
   getSubmitFormButton: function(){
-    return document.querySelector(this.submitFormButton)
+    return document.querySelector(this.submitQuestionButton)
   },
-  placeQuestionField: function(question, target){
-    var form = document.querySelector(target)
-    $(target).append(question)
+  placeNode: function(data, target){
+    $(target).append(data)
+  },
+  slideQuestionUp: function() {
+    $(this.questionCreationCell).slideUp("slow", this.emptyElement)
+  },
+  slideQuestionDown: function(){
+    $(this.questionCreationCell).slideDown()
+  },
+  emptyElement: function() {
+    $(this).empty()
+  },
+  getSurveyTitle: function(){
+    return $(this.surveyTitle)
   }
 }

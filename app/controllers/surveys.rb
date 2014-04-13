@@ -1,3 +1,7 @@
+post '/surveys' do
+  "#{params}"
+end
+
 get '/surveys/new' do
   erb :new_survey
 end
