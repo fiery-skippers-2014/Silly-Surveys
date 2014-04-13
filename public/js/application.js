@@ -24,90 +24,131 @@ Ajax.prototype = {
   onSuccess: function(serverData){
      console.log("lala");
 
+     // creating the container for the graph
+     // var graphContainer = document.createElement("div");
+     // graphContainer.id = 'container';
+     // graphContainer.style.minWidth = "310px";
+     // graphContainer.style.minHeight = "400px";
+     // graphContainer.style.margin = "0 auto";
+
+
+     //appends the newly created div
+    // $(".graphs").append($(graphContainer));
+
+
+
+
      // checking the serverData type
      console.log(typeof serverData)
-     console.log(serverData)
+     // console.log(serverData)
 
-     // creating a JS array from the ruby string
-     var numbers = serverData.split(",")
-       console.log(numbers);
+     // creating a JS array of the questions from the ruby multi string
+     var questions = serverData.split(";")
+       console.log(questions);
+       console.log(questions.length)
 
-     // separating the words from the questions
-    words = []
-    frequencies = []
+       //testing one string
 
-     for (var i = 0; i <numbers.length ; i++) {
+       for (var q = 0; q < questions.length ; q++) {
+                         // Sets the index for the div
+                         var index = q+1;
+                         graphNumber = parseInt(index);
 
-           // if even ie a word
-          if((i+2)%2==0) {
-            words.push(numbers[i]);
-          }
-          else {
-            frequencies.push(parseInt(numbers[i]));
-          }
+                         // create the div for the graph
+                        var graphContainer = document.createElement("div");
+                           graphContainer.id = 'container';
+                           graphContainer.className = parseInt(index);
+                           graphContainer.style.minWidth = "310px";
+                           graphContainer.style.minHeight = "400px";
+                           graphContainer.style.margin = "0 auto";
 
-     }
-
-
-     //printing them out for testing purposes
-     console.log(words);
-     console.log(frequencies);
-
-     // merging them together
-     questionResults = []
-
-     for (var i = 0; i < words.length; i++) {
-          questionResults.push([words[i], frequencies[i]]);
-     }
-
-    console.log(questionResults);
+                             $(".graphs").append($(graphContainer));
 
 
 
 
-     // console.log(numbers)
-     // console.log(serverData.length);
+                     question_string = questions[q];
+                     console.log(question_string);
 
-   //uploading it to the graph
-                $(function () {
-                $('#container').highcharts({
-                    chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false
-                    },
-                    title: {
-                        text: 'Browser market shares at a specific website, 2010'
-                    },
-                    tooltip: {
-                      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                color: '#000000',
-                                connectorColor: '#000000',
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                            }
+                     question = question_string.split(",");
+                     console.log(question)
+
+                   // separating the words from the questions
+                  words = []
+                  frequencies = []
+
+                   for (var i = 0; i <question.length ; i++) {
+
+                         // if even ie a word
+                        if((i+2)%2==0) {
+                          words.push(question[i]);
                         }
-                    },
-                    series: [{
-                        type: 'pie',
-                        name: 'Browser share',
-                        data:   questionResults
-                        //   [
-                        //     ['first',   numbers[0]],
-                        //     ['duplicate answer',  numbers[numbers.lastIndexOf(2) - 1]],
-                        //     ['duplicate answer',    numbers[numbers.lastIndexOf(2)]],
-                        //     ['another question',     numbers[1]],
-                        //     ['another question',   numbers[2]]
-                        // ]
-                    }]
-                });
-            });
+                        else {
+                          frequencies.push(parseInt(question[i]));
+                        }
+
+                   }
+
+
+                   //printing them out for testing purposes
+                   console.log(words);
+                   console.log(frequencies);
+
+                  //  // merging them together
+                   questionResults = []
+
+                   for (var i = 0; i < words.length; i++) {
+                        questionResults.push([words[i],frequencies[i]]);
+                   }
+
+                  console.log(questionResults);
+
+
+
+
+                   // console.log(numbers)
+                   // console.log(serverData.length);
+
+                 //uploading it to the graph
+                              $(function () {
+                              var options = {
+                                  chart: {
+                                      plotBackgroundColor: null,
+                                      plotBorderWidth: null,
+                                      plotShadow: false
+                                  },
+                                  title: {
+                                      text: 'Question ' + graphNumber
+                                  },
+                                  tooltip: {
+                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                  },
+                                  plotOptions: {
+                                      pie: {
+                                          allowPointSelect: true,
+                                          cursor: 'pointer',
+                                          dataLabels: {
+                                              enabled: true,
+                                              color: '#000000',
+                                              connectorColor: '#000000',
+                                              format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                                          }
+                                      }
+                                  },
+                                  series: [{
+                                      type: 'pie',
+                                      name: 'Browser share',
+                                      data:   questionResults
+
+                                  }]
+                              };
+                           // end of the highchar
+                            $('#container.'+graphNumber).highcharts(options)
+                          });
+
+      //end of the for loop
+
+    }
 
   //  end of the on success method
    },
@@ -137,54 +178,10 @@ $(document).ready(function(){
    var ajax = new Ajax('get','/survey/details')
    ajax.request(form).done(ajax.onSuccess).fail(ajax.onFail)
 
+   // testing to see what the alert does
+
+
   })
-
-
-// $(function () {
-//     $('#container').highcharts({
-//         chart: {
-//             plotBackgroundColor: null,
-//             plotBorderWidth: null,
-//             plotShadow: false
-//         },
-//         title: {
-//             text: 'Browser market shares at a specific website, 2010'
-//         },
-//         tooltip: {
-//           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-//         },
-//         plotOptions: {
-//             pie: {
-//                 allowPointSelect: true,
-//                 cursor: 'pointer',
-//                 dataLabels: {
-//                     enabled: true,
-//                     color: '#000000',
-//                     connectorColor: '#000000',
-//                     format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-//                 }
-//             }
-//         },
-//         series: [{
-//             type: 'pie',
-//             name: 'Browser share',
-//             data: [
-//                 ['Firefox',   45.0],
-//                 ['IE',       26.8],
-//                 {
-//                     name: 'Chrome',
-//                     y: 12.8,
-//                     sliced: true,
-//                     selected: true
-//                 },
-//                 ['Safari',    8.5],
-//                 ['Opera',     6.2],
-//                 ['Others',   0.7]
-//             ]
-//         }]
-//     });
-// });
-
 
 
 
@@ -200,3 +197,7 @@ $(document).ready(function(){
 
 
 });
+
+
+// function to remove the graph divs
+ function removeGraphs(){ $('.graphs').empty()};
