@@ -33,8 +33,13 @@ get '/survey/details' do
   end
   puts "#{@answer_frequency}"
 
+
+  @unique_answer_values_and_frequencies = @unique_answer_values.zip(@answer_frequency)
+
+   puts "#{@unique_answer_values_and_frequencies}"
   #return the answer frequency
-  @answer_frequency.join(",")
+  @unique_answer_values_and_frequencies.join(",")
+
 end
 
 get '/surveys/new' do

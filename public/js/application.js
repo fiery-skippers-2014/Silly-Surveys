@@ -26,19 +26,47 @@ Ajax.prototype = {
 
      // checking the serverData type
      console.log(typeof serverData)
+     console.log(serverData)
 
      // creating a JS array from the ruby string
      var numbers = serverData.split(",")
        console.log(numbers);
 
-       // parsing the string numbers to numbers
+     // separating the words from the questions
+    words = []
+    frequencies = []
+
      for (var i = 0; i <numbers.length ; i++) {
-          actual_number = parseInt(numbers[i]);
-          numbers[i] = actual_number;
+
+           // if even ie a word
+          if((i+2)%2==0) {
+            words.push(numbers[i]);
+          }
+          else {
+            frequencies.push(parseInt(numbers[i]));
+          }
+
      }
 
-     console.log(numbers)
-     console.log(serverData.length);
+
+     //printing them out for testing purposes
+     console.log(words);
+     console.log(frequencies);
+
+     // merging them together
+     questionResults = []
+
+     for (var i = 0; i < words.length; i++) {
+          questionResults.push([words[i], frequencies[i]]);
+     }
+
+    console.log(questionResults);
+
+
+
+
+     // console.log(numbers)
+     // console.log(serverData.length);
 
    //uploading it to the graph
                 $(function () {
@@ -69,13 +97,14 @@ Ajax.prototype = {
                     series: [{
                         type: 'pie',
                         name: 'Browser share',
-                        data: [
-                            ['first',   numbers[0]],
-                            ['duplicate answer',  numbers[numbers.lastIndexOf(2) - 1]],
-                            ['duplicate answer',    numbers[numbers.lastIndexOf(2)]],
-                            ['another question',     numbers[1]],
-                            ['another question',   numbers[2]]
-                        ]
+                        data:   questionResults
+                        //   [
+                        //     ['first',   numbers[0]],
+                        //     ['duplicate answer',  numbers[numbers.lastIndexOf(2) - 1]],
+                        //     ['duplicate answer',    numbers[numbers.lastIndexOf(2)]],
+                        //     ['another question',     numbers[1]],
+                        //     ['another question',   numbers[2]]
+                        // ]
                     }]
                 });
             });
