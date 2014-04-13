@@ -39,12 +39,11 @@ th {
  }
 
  .login {
-    color: #F5f6f7;
-    text-shadow: black 0.1em 0.1em 0.2em;
- }
+    color: #B4cde5;
+    text-shadow: 1px 1px white, -1px -1px #444 }
 
  .signup {
     color: rgb(231, 186, 186);
-    text-shadow: black 0.1em 0.1em 0.2em;
+    text-shadow: 1px 1px white, -1px -1px #444 }
 
  }
