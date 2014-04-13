@@ -1,0 +1,7 @@
+TODO
+  X when you ping /survey post route
+      X send the title of the survey.
+  o When a user creates questions
+      o link the questions to the user
+      o change from Question.where(survey_id: null)
+        to Question.where(survey_id: session[:user_id])

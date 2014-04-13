@@ -14,10 +14,25 @@
  <script type="text/javascript" src="/js/client.js"></script>
  <script type="text/javascript" src="/js/controller.js"></script>
  <script type="text/javascript" src="/js/view.js"></script>
-
-  <title></title>
 </head>
-<body background="http://subtlepatterns.com/patterns/dimension.png">
+<body>
+  <nav>
+    <div class="brand"><a href="/">Silly</a>
+    </div>
+    <ul>
+      <% if current_user %>
+        <li>
+          <form id="sign-out" action="/sessions/<%= current_user.id %>" method="post">
+            <input name="_method" type="hidden" value="delete" />
+            <input type="submit" value="Sign Out">
+          </form>
+        </li>
+      <% else %>
+        <li><a href="/session/login">Sign In</a></li>
+        <li><a href="/session/login">Sign Up</a></li>
+      <% end %>
+    </ul>
+  </nav>
   <%= yield %>
 </body>
 </html>

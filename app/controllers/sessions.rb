@@ -10,8 +10,13 @@ post "/session/login" do
 
     redirect "/user/#{session[:user_id]}"
   else
-    "<h1>you suck</h1>" #BUGBUG
+    "<h1>you rock</h1>" #BUGBUG
   end
+end
+
+delete "/sessions/:id" do
+  session[:user_id] = nil
+  redirect "/session/login"
 end
 
 post "/session/sign-up" do
