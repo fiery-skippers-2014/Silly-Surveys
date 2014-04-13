@@ -2,7 +2,7 @@ post '/surveys' do
   survey = Survey.create(
     title: params[:title]
     )
-  questions = Question.where(survey_id: nil)
+  questions = Question.where(user_id: session[:user_id])
 
   questions.each do |question|
     question.update_attribute(:survey_id,survey.id)
@@ -30,6 +30,7 @@ end
 post "/surveys/questions" do
   question = Question.create(
     description: params[:description],
+    user_id: session[:user_id]
     )
   3.times do |x|
     x += 1
