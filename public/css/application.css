@@ -2,8 +2,9 @@
     margin: 20px auto;
     width: 600px;
     padding: 0px 20px 20px 20px;
-    border: 1px dotted black;
+    border: 1px solid black;
     text-align: center;
+    border-radius: 25px;
 }
 th {
     text-align: left;
@@ -35,4 +36,12 @@ th {
 	margin:10px auto;
 	display:inline-block;
 	padding:5px;
+ }
+
+ .login {
+    color: #BECFD8;
+ }
+
+ .signup {
+    color: rgb(231, 186, 186);
  }

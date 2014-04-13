@@ -1,3 +1,4 @@
+
 function Ajax(method, action){
   this.method = method
   this.action = action
@@ -96,7 +97,9 @@ Ajax.prototype = {
 
 
 
+
 $(document).ready(function(){
+
        // debug one thing at a time, submit is unique to the form tag
   $('.survey_details').submit(function(event){
         console.log(this)
@@ -161,6 +164,16 @@ $(document).ready(function(){
 
 
 
+
+
+  domSelectors = {
+    addQuestionButton: ".question"
+  }
+
+  var view = new View(domSelectors)
+  var client = new Client()
+  var controller = new Controller(client, view)
+  controller.listeners()
 
 
 });
