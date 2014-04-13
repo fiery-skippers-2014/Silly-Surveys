@@ -15,14 +15,21 @@ get '/survey/details' do
   @unique_answer_values = @answer_values.uniq
   puts "#{@unique_answer_values}"
 
+  #add a repeated value for testing
+
+
   #calculating the times that the unique answer_values are answered
   #an array to store the frequency of the answers
   @answer_frequency = []
-  @answer_values.each do |answer_value|
+  @unique_answer_values.each_with_index do |unique_answer,index|
      count = 0
-     @unique_answer_values.each {|unique_answer| count += 1 if answer_value == unique_answer }
+     @answer_values.each do |answer_value|
+           count += 1 if answer_value == unique_answer
+      end
+
      puts("#{count}")
-     @answer_frequency.push(count)
+
+     @answer_frequency[index] = count
   end
   puts "#{@answer_frequency}"
 
