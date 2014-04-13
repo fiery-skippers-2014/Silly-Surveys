@@ -1,5 +1,5 @@
-<h1><%= @question.description %></h1>
-  <% @question.answers.each do |answer| %>
-    <input type="radio" name="sex" value="male"><%= answer.answer %><br>
+<h1 class="<%= @question.id%>"><%= @question.description %></h1>
+  <% @answers.each_with_index do |answer, index| %>
+    <input type="radio" name="answer<%= index + 1 %>" value="<%= answer.id %>"><%= answer.answer %><br>
   <% end %>
   

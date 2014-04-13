@@ -1,5 +1,13 @@
 post '/surveys' do
-  "#{params}"
+  survey = Survey.create(
+    title: params[:title]
+    )
+  questions = Question.where(survey_id: nil)
+
+  questions.each do |question|
+    question.update_attribute(:survey_id,survey.id)
+  end
+  "yes"
 end
 
 get '/surveys/new' do
@@ -8,6 +16,7 @@ end
 
 get '/surveys/questions/new' do
   @question = Question.last
+  @answers = @question.answers
 
   erb :_formatted_question, layout: false
 end
