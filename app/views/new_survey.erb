@@ -1,19 +1,27 @@
-<h2>Create a new survey!</h2>
+<div class="container">
+  <h2>Create a new survey!</h2>
 
-<form action='/surveys' method="post">
-  Title: <input type="text" name="title" class="title form-control">
-    <button class="question btn btn-info">Add question</button><br>
-</form>
-
-<article class="questionCreation">
-  
-</article>
-
-<article>
-  <form class="saveForm">
-    
+  <form action='/surveys' method="post">
+    <div class="surveyTitleWrap">
+      <div class="titleWrap">
+        <input type="text" name="title" class="title form-control" placeholder="Survey Title">
+      </div>
+      <button class="question btn btn-info">Add question</button>
+    </div>
   </form>
 
-  <button class="saveFormButton">Save Form</button>
-</article>
+  <section class="questionCreation">
+
+  </section>
+
+  <hr class="divider">
+  <section class="submitSurvey">
+    <form class="saveForm">
+
+    </form>
+
+    <button class="saveFormButton btn btn-default">Save Form</button>
+  </section>
+
+</div>
 

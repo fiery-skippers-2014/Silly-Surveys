@@ -1,7 +1,10 @@
-  <form method='post' class="questionForm">
-  Question: <input type="text" name="description" class="form-control"><br>
-  Answer: <input type="text" name="answer1" class="answer1 form-control"><br>
-  Answer: <input type="text" name="answer2" class="answer2 form-control" ><br>
-  Answer: <input type="text" name="answer3" class="answer3 form-control"><br>
-  <button type="submit" class="submit btn btn-success">Submit</button>
+<form method='post' class="questionForm">
+  <section class="questionWrap">
+    <input type="text" name="description" class="form-control" placeholder="Question"><button type="submit" class="submit btn btn-success">Submit</button>
+
+    <div class="answerWrap"><input type="text" name="answer1" class="answer1 form-control" placeholder="Answer"></div>
+    <div class="answerWrap"><input type="text" name="answer2" class="answer2 form-control" placeholder="Answer"></div>
+    <div class="answerWrap"><input type="text" name="answer3" class="answer3 form-control" placeholder="Answer"></div>
+  </section>
+
 </form>
