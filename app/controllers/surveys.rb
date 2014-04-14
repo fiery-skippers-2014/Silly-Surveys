@@ -13,7 +13,7 @@ post '/surveys' do
     survey_id: survey.id,
     creator: true
     )
-  "yes"
+  redirect "user/#{session[:user_id]}"
 end
 
 get '/surveys/new' do
