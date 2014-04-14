@@ -58,9 +58,9 @@ th {
     width: 500px;
     padding: 5px;
 
-    border: 1px dotted black;
+    border-radius: 10px;
     text-align: center;
-    background-color: green;
+    background-color: white;
 }
 
 #color_me li{
@@ -107,6 +107,9 @@ th {
 }
 .submitSurvey {
   margin-top: 5%;
+}
+.surveys {
+    margin-top: 60px;
 }
 .surveyTitleWrap {
   margin: 1% auto;

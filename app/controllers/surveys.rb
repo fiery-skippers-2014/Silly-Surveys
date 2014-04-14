@@ -1,3 +1,8 @@
+get '/' do 
+  @surveys = Survey.all
+  erb :home
+end
+
 
 post '/surveys' do
   survey = Survey.create(
@@ -16,8 +21,6 @@ post '/surveys' do
     )
   redirect "user/#{session[:user_id]}"
 end
-
-
 get '/surveys/new' do
   if session[:user_id]
     erb :new_survey
@@ -25,6 +28,15 @@ get '/surveys/new' do
     redirect '/session/login'
   end
 end
+post '/surveys/new' do
+  ## need to connect it to chart
+end
+
+get '/surveys/survey/:id' do
+  @survey = Survey.find(params[:id])
+  erb :single_survey
+end
+
 
 get '/surveys/questions/new' do
   @question = Question.last

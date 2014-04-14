@@ -7,13 +7,13 @@
       <!-- Form to call all of the events -->
       <form id="<%= survey.id %>" class="survey_details" method="get" action="/survey/details" >
         <input type="hidden" value="<%= survey.id %>" name="survey_id">
-        <input class="formButton" type="submit" value="Details">
+        <input class="formButton btn btn-default" type="submit" value="Details">
       </form>
 
       <!-- Button to remove the child elements where the graphs live, its on line 202 in the JS file -->
       <!-- I know this is bad form try to make css for it -->
     <br>
-   <button onclick="removeGraphs()"> Hide Details </button>
+   <button class="btn btn-danger"onclick="removeGraphs()"> Hide Details </button>
 
 
      <!-- Parent div that will contain all of the graphs -->
@@ -26,7 +26,7 @@
 
    <form method="get" action="/surveys/new">
 
-        <input type="submit" value="Create a Survey" class="createSurvey">
+        <input type="submit" value="Create a Survey" class="createSurvey btn btn-success">
       </form>
 
 </div>
