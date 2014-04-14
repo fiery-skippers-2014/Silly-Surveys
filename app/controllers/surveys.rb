@@ -29,7 +29,10 @@ get '/surveys/new' do
   end
 end
 post '/surveys/new' do
-  ## need to connect it to chart
+  @answer = Answer.find(params[:choice])
+  vote_count = @answer.count + 1
+  @answer.update_attribute(:count, vote_count)
+  redirect '/'
 end
 
 get '/surveys/survey/:id' do
@@ -84,7 +87,7 @@ get '/survey/details' do
               @answers = question.answers
 
               # all the answer_values of those answers
-              @answer_values = @answers.map {|answer| answer.answer}
+              @answer_values = @answers.map {|answer| answer.count}
               # puts "#{@answer_values}"
 
               #all the unique answer values of that question
