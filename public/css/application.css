@@ -83,11 +83,12 @@ th {
  }
 
  .login {
-    color: #BECFD8;
- }
+    color: #B4cde5;
+    text-shadow: 1px 1px white, -1px -1px #444 }
 
 .signup {
   color: rgb(231, 186, 186);
+  text-shadow: 1px 1px white, -1px -1px #444 }
 }
 .liveForm {
   width: 50%;
