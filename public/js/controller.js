@@ -43,7 +43,14 @@ Controller.prototype = {
     this.view.slideQuestionUp()
   },
   survey: function(data){
-    console.log(data)
+    $(".container").slideUp("fast", function(){
+      $(".container").append('<a href="/"><button class="btn btn-info">home</button></a>')
+    }).delay(300)
+    $(".container").empty()
+
+    
+    $(".container").fadeIn("fast")
+    
   },
   onFail: function() {
     console.log("noooo")

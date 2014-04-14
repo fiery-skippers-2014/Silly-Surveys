@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="surveys">
+    <ol>
+        <% @surveys.each do |survey| %>
+            <li><a href="/surveys/survey/<%= survey.id %>"><%= survey.title %></a></li>
+        <% end %>
+    </ol>
+  </div>
+  <a href="/user/<%= session[:user_id]%>"><button class="btn btn-info">My Page</button></a>
+</div>
