@@ -1,0 +1,12 @@
+<div class="container">
+  <form method="post" action="/">
+    <h1><%= @survey.title %></h1>
+    <% @survey.questions.each do |question| %>
+      <h3><%= question.description %></h3>
+      <% question.answers.each do |answer| %>
+        <input type="radio" value="<%= answer.id %>"><%= answer.answer %><br>
+      <% end %>
+    <% end %>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

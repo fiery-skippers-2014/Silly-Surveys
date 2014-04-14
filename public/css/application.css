@@ -1,4 +1,4 @@
-.container {
+.big_container {
     margin: 20px auto;
     width: 600px;
     padding: 0px 20px 20px 20px;
@@ -56,10 +56,11 @@ th {
 .survey {
    margin: 20px auto;
     width: 500px;
+    padding: 5px;
 
-    border: 1px dotted black;
+    border-radius: 10px;
     text-align: center;
-    background-color: green;
+    background-color: white;
 }
 
 #color_me li{
@@ -98,7 +99,7 @@ th {
 
 .questionWrap {
   width: 40%;
-  margin-left: -25%;
+  margin-left: 5%;
 }
 .questionWrap > input {
   color: blue;
@@ -106,6 +107,9 @@ th {
 }
 .submitSurvey {
   margin-top: 5%;
+}
+.surveys {
+    margin-top: 60px;
 }
 .surveyTitleWrap {
   margin: 1% auto;
