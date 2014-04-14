@@ -1,10 +1,28 @@
-<div class="container">
+<div class="big_container">
    <% @surveys.each do |survey| %>
     <div class="survey">
       <p><%= survey.title %></p>
-    </div>
-  <% end %>
 
+
+      <!-- Form to call all of the events -->
+      <form id="<%= survey.id %>" class="survey_details" method="get" action="/survey/details" >
+        <input type="hidden" value="<%= survey.id %>" name="survey_id">
+        <input class="formButton" type="submit" value="Details">
+      </form>
+
+      <!-- Button to remove the child elements where the graphs live, its on line 202 in the JS file -->
+      <!-- I know this is bad form try to make css for it -->
+    <br>
+   <button onclick="removeGraphs()"> Hide Details </button>
+
+
+     <!-- Parent div that will contain all of the graphs -->
+    <div class="graphs">
+    </div>
+
+  </div>
+
+  <% end %>
 
    <form method="get" action="/surveys/new">
 
@@ -12,3 +30,5 @@
       </form>
 
 </div>
+
+
