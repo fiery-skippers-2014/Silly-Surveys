@@ -17,6 +17,46 @@ post '/surveys' do
   redirect "user/#{session[:user_id]}"
 end
 
+
+get '/surveys/new' do
+  if session[:user_id]
+    erb :new_survey
+  else
+    redirect '/session/login'
+  end
+end
+
+get '/surveys/questions/new' do
+  @question = Question.last
+  @answers = @question.answers
+
+  erb :_formatted_question, layout: false
+end
+
+post "/surveys/questions" do
+  question = Question.create(
+    description: params[:description],
+    user_id: session[:user_id]
+    )
+  3.times do |x|
+    x += 1
+    answer = "answer#{x}".to_s
+    Answer.create(
+      answer: params[answer],
+      question_id: question.id
+      )
+
+  end
+  redirect '/surveys/questions/new'
+end
+
+get '/surveys/question/new' do
+  erb :_question, layout: false
+end
+
+
+
+
 get '/survey/details' do
 
   # the first question of the survey
@@ -69,43 +109,3 @@ get '/survey/details' do
   @unique_answer_values_and_frequencies.join(";")
 
 end
-
-get '/surveys/new' do
-  if session[:user_id]
-    erb :new_survey
-  else
-    redirect '/session/login'
-  end
-end
-
-get '/surveys/questions/new' do
-  @question = Question.last
-  @answers = @question.answers
-
-  erb :_formatted_question, layout: false
-end
-
-post "/surveys/questions" do
-  question = Question.create(
-    description: params[:description],
-    user_id: session[:user_id]
-    )
-  3.times do |x|
-    x += 1
-    answer = "answer#{x}".to_s
-    Answer.create(
-      answer: params[answer],
-      question_id: question.id
-      )
-
-  end
-  redirect '/surveys/questions/new'
-end
-
-get '/surveys/question/new' do
-  erb :_question, layout: false
-end
-
-
-
-
