@@ -29,9 +29,8 @@ get '/surveys/new' do
   end
 end
 post '/surveys/new' do
-  @answer = Answer.find(params[:choice])
-  vote_count = @answer.count + 1
-  @answer.update_attribute(:count, vote_count)
+  selected_answers = params[:answers].collect { |answer_id| Answer.find(answer_id) }.flatten
+  selected_answers.each {|answer| answer.update_attribute(:count, answer.count + 1)}
   redirect '/'
 end
 

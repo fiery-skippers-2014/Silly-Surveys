@@ -4,7 +4,7 @@
     <% @survey.questions.each do |question| %>
       <h3><%= question.description %></h3>
         <% question.answers.each do |answer| %>
-            <input type="radio" name="choice" value="<%= answer.id %>"><%= answer.answer %><br>
+            <input type="radio" name="answers[]" value="<%= answer.id %>"><%= answer.answer %><br>
         <% end %>
     <% end %>
     <button type="submit" class="btn btn-success">Submit</button>
