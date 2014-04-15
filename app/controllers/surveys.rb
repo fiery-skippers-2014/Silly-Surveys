@@ -29,9 +29,8 @@ get '/surveys/new' do
   end
 end
 post '/surveys/new' do
-  @answer = Answer.find(params[:choice])
-  vote_count = @answer.count + 1
-  @answer.update_attribute(:count, vote_count)
+  selected_answers = params[:answers].collect { |answer_id| Answer.find(answer_id) }.flatten
+  selected_answers.each {|answer| answer.update_attribute(:count, answer.count + 1)}
   redirect '/'
 end
 
@@ -69,58 +68,34 @@ get '/surveys/question/new' do
   erb :_question, layout: false
 end
 
-
-
-
 get '/survey/details' do
+  unique_answer_values_and_frequencies = []
+  questions = Survey.find(params[:type]).questions
 
-  # the first question of the survey
-  @questions = Survey.find(params[:type]).questions
+  questions.each_with_index do |question,index|
+    answer_counts = question.answers.map(&:count)
+    answer_string = build_survey_answer_string(answer_counts)
+    unique_answer_values_and_frequencies[index] = answer_string
+  end
 
-  # The array that stores the unique answers and frequencies to all the questions
-  @unique_answer_values_and_frequencies = []
-
-  # a loop that iterates through all the questions
-  @questions.each_with_index do |question,index|
-
-              # all the answers tied to that question
-              @answers = question.answers
-
-              # all the answer_values of those answers
-              @answer_values = @answers.map {|answer| answer.count}
-              # puts "#{@answer_values}"
-
-              #all the unique answer values of that question
-              @unique_answer_values = @answer_values.uniq
-              # puts "#{@unique_answer_values}"
+  unique_answer_values_and_frequencies.join(";")
+end
 
 
+def build_survey_answer_string answer_counts
+  unique_answer_values = answer_counts.uniq
+  answer_frequency = build_answer_frequency(answer_counts, unique_answer_values)
+  unique_answer_values.zip(answer_frequency).join(',')
+end
 
-              #calculating the times that the unique answer_values are answered
-              #an array to store the frequency of the answers
-              @answer_frequency = []
-              @unique_answer_values.each_with_index do |unique_answer,index|
-                 count = 0
-                 @answer_values.each do |answer_value|
-                       count += 1 if answer_value == unique_answer
-                  end
-
-                 # puts("#{count}")
-
-                 @answer_frequency[index] = count
-              end
-              puts "#{@answer_frequency}"
-
-
-              @u_answers_n_freq = @unique_answer_values.zip(@answer_frequency)
-              answer_string = @u_answers_n_freq.join(",")
-              @unique_answer_values_and_frequencies[index] = answer_string
-
-      end
-
-
-   # puts "#{@unique_answer_values_and_frequencies}"
-  #return the answer frequency
-  @unique_answer_values_and_frequencies.join(";")
-
+def build_answer_frequency(answer_counts, unique_answer_values)
+  answer_frequency = []
+  unique_answer_values.each_with_index do |unique_answer, index|
+    count = 0
+    answer_counts.each do |answer_value|
+      count += 1 if answer_value == unique_answer
+    end
+    answer_frequency[index] = count
+  end
+  answer_frequency
 end
