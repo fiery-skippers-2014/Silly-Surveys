@@ -3,9 +3,9 @@
     <h1><%= @survey.title %></h1>
     <% @survey.questions.each do |question| %>
       <h3><%= question.description %></h3>
-      <input type="radio" name="choice" value="<%= question.answers[0].id %>"><%= question.answers[0].answer %><br>
-      <input type="radio" name="choice" value="<%= question.answers[1].id %>"><%= question.answers[1].answer %><br>
-      <input type="radio" name="choice" value="<%= question.answers[2].id %>"><%= question.answers[2].answer %><br>
+        <% question.answers.each do |answer| %>
+            <input type="radio" name="choice" value="<%= answer.id %>"><%= answer.answer %><br>
+        <% end %>
     <% end %>
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
